@@ -18,7 +18,46 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+      
+
+    /* Creating function in HTML for backspace operation */
+    function backspace(calc) {                      
+      size = calc.display.value.length;
+      calc.display.value = calc.display.value.substring(0, size-1);
+    }
+    
+    /* Creating function to calculate factorial of element */
+    function calculate(calc) {
+      
+      /* Check if function include ! character then
+      calculate factorial of number */
+      if(calc.display.value.includes("!")) {
+        
+        size = calc.display.value.length;
+        n = Number(calc.display.value.substring(0, size-1));
+        f = 1;
+        
+        for(i = 2; i <= n; i++)
+          f = f*i;
+        calc.display.value = f;
+      }
+      
+      /* If function include % character then calculate
+      the % of number */
+      else if(calc.display.value.includes("%")) {
+        
+        size = calc.display.value.length;
+        n = Number(calc.display.value.substring(0, size-1));
+        calc.display.value = n/100;
+      }
+
+      else
+        /* Otherwise evaluate and execute output */
+        calc.display.value = eval(calc.display.value);
+    }
+
+    </script>    
 
     <!-- Want to add Bootstrap? -->
     <!-- Visit: https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
@@ -28,14 +67,15 @@
   <body>
 
     <header id="header">
-      <img src="logo.jpg">
+      <!-- <img src="logo.jpg"> -->
       <h1>Online Calculators</h1>
       
       <!-- Menu link fragment #id should match a div id. Example: <a href="#home"> links to <div id="home"></div>  -->
       <ul class="main-menu">
-        <li><a href="#home">home</a></li>
-        <li><a href="#about">about</a></li>
-        <li><a href="#contact">contact</a></li>
+        <li><a href="#home">Home</a></li>
+        <!-- <li><a href="#about">About</a></li> -->
+        <!-- <li><a href="#contact">Contact</a></li> -->
+        <li><a href="#SciCalc">Scientific</a></li>
       </ul>                 
     </header>
    
@@ -44,9 +84,10 @@
         <div id="content"> 
           
           <div id="home" class="content-region hide">
-            <h2>Home</h2>
+            <!-- <h2>Home</h2> -->
             <p>
-              This is a simple website template published with Github Pages. <a href="https://github.com/cpl-makerlab/simple-website-template">Fork this repository</a> to create your own site!
+              <!-- This is a simple website template published with Github Pages. <a href="https://github.com/cpl-makerlab/simple-website-template">Fork this repository</a> to create your own site! -->
+              This contains simple javascript implementation of calculators.
             </p>
           </div>
           
@@ -63,14 +104,184 @@
               Pellentesque nec nam aliquam sem et tortor consequat. Quisque sagittis purus sit amet volutpat consequat. Magna eget est lorem ipsum dolor. 
             </p>
           </div>
+
+          <div id="SciCalc" class="content-region hide">
+            <!-- <h2>Contact</h2> -->
+              <form name = "calc">
+    
+              <table id = "calc" border = 2>
+                
+              <tr>
+                <td colspan=5><input id="btn" name="display"
+                  onkeypress="return event.charCode >= 48
+                  && event.charCode <= 57" type="text">
+                </td>
+              </tr>
+              
+              <tr>
+                <td><input id="btn" type="button" value="1"
+                    OnClick="calc.display.value+='1'">
+                </td>
+                
+                <td><input id="btn" type="button" value="2"
+                    OnClick="calc.display.value+='2'">
+                </td>
+                
+                <td><input id="btn" type="button" value="3"
+                    OnClick="calc.display.value+='3'">
+                </td>
+                
+                <td><input id="btn" type="button" value="C"
+                    OnClick="calc.display.value=''">
+                </td>
+                <td><input id="btn" type="button" value="<-"
+                    OnClick="backspace(this.form)">
+                </td>
+                <td><input id="btn" type="button" value="="
+                    OnClick="calculate(this.form)">
+                </td>
+              </tr>
+              
+              <tr>
+                <td><input id="btn" type="button" value="4"
+                    OnClick="calc.display.value+='4'">
+                </td>
+                
+                <td><input id="btn" type="button" value="5"
+                    OnClick="calc.display.value+='5'">
+                </td>
+                
+                <td><input id="btn" type="button" value="6"
+                    OnClick="calc.display.value+='6'">
+                </td>
+                
+                <td><input id="btn" type="button" value="-"
+                    OnClick="calc.display.value='-'">
+                </td>
+                
+                <td><input id="btn" type="button" value="%"
+                    OnClick="calc.display.value+='%'">
+                </td>
+                
+                <td><input id="btn" type="button" value="cos"
+                    OnClick="calc.display.value='Math.cos('">
+                </td>
+              </tr>
+              
+              <tr>
+                <td><input id="btn" type="button" value="7"
+                    OnClick="calc.display.value+='7'">
+                </td>
+                
+                <td><input id="btn" type="button" value="8"
+                    OnClick="calc.display.value+='8'">
+                </td>
+                
+                <td><input id="btn" type="button" value="9"
+                    OnClick="calc.display.value+='9'">
+                </td>
+                
+                <td><input id="btn" type="button" value="*"
+                    OnClick="calc.display.value+='*'">
+                </td>
+                
+                <td><input id="btn" type="button" value="n!"
+                    OnClick="calc.display.value+='!'">
+                </td>
+                
+                <td><input id="btn" type="button" value="sin"
+                    OnClick="calc.display.value='Math.sin('">
+                </td>
+              </tr>
+              
+              <tr>
+                <td><input id="btn" type="button" value="."
+                    OnClick="calc.display.value+='.'">
+                </td>
+                
+                <td><input id="btn" type="button" value="0"
+                    OnClick="calc.display.value+='0'">
+                </td>
+                
+                <td><input id="btn" type="button" value=","
+                    OnClick="calc.display.value+=','">
+                </td>
+                
+                <td><input id="btn" type="button" value="+"
+                    OnClick="calc.display.value+='+'">
+                </td>
+                
+                <td><input id="btn" type="button" value="/"
+                    OnClick="calc.display.value+='/'">
+                </td>
+                
+                <td><input id="btn" type="button" value="tan"
+                    OnClick="calc.display.value='Math.tan('">
+                </td>
+              </tr>
+              
+              <tr>
+                <td><input id="btn" type="button" value="E"
+                    OnClick="calc.display.value+='Math.E'">
+                </td>
+                
+                <td><input id="btn" type="button" value="pi"
+                    OnClick="calc.display.value+='Math.PI'">
+                </td>
+                
+                <td><input id="btn" type="button" value="^"
+                    OnClick="calc.display.value+='Math.pow('">
+                </td>
+                
+                <td><input id="btn" type="button" value="("
+                    OnClick="calc.display.value+='('">
+                </td>
+                
+                <td><input id="btn" type="button" value=")"
+                    OnClick="calc.display.value+=')'">
+                </td>
+                
+                <td><input id="btn" type="button" value="log"
+                    OnClick="calc.display.value='Math.log('">
+                </td>
+              </tr>
+              
+              <tr>
+                <td><input id="btn" type="button" value="sqrt"
+                    OnClick="calc.display.value+='Math.sqrt('">
+                </td>
+                
+                <td><input id="btn" type="button" value="ln2"
+                    OnClick="calc.display.value+='Math.LN2'">
+                </td>
+                
+                <td><input id="btn" type="button" value="ln10"
+                    OnClick="calc.display.value+='Math.Log10'">
+                </td>
+                
+                <td><input id="btn" type="button" value="l2e"
+                    OnClick="calc.display.value+='Math.LOG2E'">
+                </td>
+                
+                <td><input id="btn" type="button" value="l10e"
+                    OnClick="calc.display.value+='Math.log10'">
+                </td>
+                
+                <td><input id="btn" type="button" value="exp"
+                    OnClick="calc.display.value='Math.exp('">
+                </td>
+              </tr>
+              </table>
+              </form>
+          </div>
           
         </div>
       </div>
     </div>
 
-    <footer>  
+<!--     <footer>  
       Footer region
-    </footer>
+    </footer> -->
     
     <!-- Load additional JS scripts here -->
     <script type="text/javascript" src="script.js"></script>
